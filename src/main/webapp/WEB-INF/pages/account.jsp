@@ -186,7 +186,7 @@
 
 <div style="position: relative; left: 50%; float: left;">
     <!-- Download links -->
-    <a href="/resources/downloads/Polite Stare-3.1.exe" style="position: relative; left: -50%;">
+    <a href="/resources/downloads/Polite Stare-3.1.rar" style="position: relative; left: -50%;">
         <img style="position: relative; width: 138px;" src="/resources/images/windows.png">
     </a>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
