@@ -1,0 +1,79 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <context:component-scan base-package="com.great.bench"/>
+    <mvc:annotation-driven />
+	<context:property-placeholder location="classpath:app.properties" />
+
+    <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1048576000"/>
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+
+    <security:http auto-config="true">
+	    <security:intercept-url pattern="/**" requires-channel="${PROTOCOL}"/>
+	</security:http>
+	
+	<security:authentication-manager>
+	  <security:authentication-provider>
+	    <security:user-service>
+			<security:user name="Kadavi" password="grantdawsoN1" authorities="ROLE_USER" />
+	    </security:user-service>
+	  </security:authentication-provider>
+	</security:authentication-manager>
+
+    <!--
+    <mongo:db-factory id="mongoDbFactory" host="ds053698.mongolab.com"
+                      port="53698"
+                      dbname="puddy"
+                      username="Kadavi"
+                      password="grantdawsoN1"/>
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="monFactory"/>
+    </bean>
+    -->
+
+    <mongo:db-factory id="mongoDbFactory" host="horace.0.mongolayer.com"
+                      port="10085"
+                      dbname="puddy"
+                      username="Kadavi"
+                      password="grantdawsoN1"/>
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+    </bean>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="25"/>
+        <property name="username" value="coedry@gmail.com"/>
+        <property name="password" value="cuddleme"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>
